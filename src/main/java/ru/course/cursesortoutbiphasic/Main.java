@@ -26,7 +26,7 @@ public class Main extends Application {
         //Создаём загрузчик fxml файло, который преопразует fxml в графическое представление (Scene)
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
         //Преобразуем, устанавливая размеры окна
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 700);
         //Ставим заголовок
         stage.setTitle("Алгоритмы внешней сортировки");
         //Делаем жёсткий размер окна
