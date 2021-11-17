@@ -81,7 +81,7 @@ public class Interface {
                     Stage newStage = Main.getSavedStage();
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("graph.fxml"));
                     //Преобразуем, устанавливая размеры окна
-                    Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+                    Scene scene = new Scene(fxmlLoader.load(), 800, 700);
                     //Устанавливаем внутренности окна
                     newStage.setScene(scene);
                     //Демострируем окно (до этого его не видно)

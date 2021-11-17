@@ -34,7 +34,7 @@ public class SecondInterface {
                     Stage stage = Main.getSavedStage();
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
                     //Преобразуем, устанавливая размеры окна
-                    Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+                    Scene scene = new Scene(fxmlLoader.load(), 800, 700);
                     //Устанавливаем внутренности окна
                     stage.setScene(scene);
                     //Демострируем окно (до этого его не видно)
