@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Главный класс, в котором находится точка входа в программу.
  * Наследуется от Application и переопределяет его метод start
@@ -13,12 +16,15 @@ import java.io.IOException;
  * throws IOException- output\input exception - ошибка ввода\вывода - исключение, которое выбрасывается если при вызове fxmlLoader.load() не будет найден файл.
  * @Override - аннотация, помогающая программисту не ошибиться при переопределении метода. Если вы нарушите струтуру переопределяемого метода, то она начнёт ругаться
  **/
-public class App extends Application {
+public class Main extends Application {
+    //инициализируем список
+    private static ArrayList<Base> bases = new ArrayList<>();
+    private static Stage savedStage;
 
     @Override
     public void start(Stage stage) throws IOException {
         //Создаём загрузчик fxml файло, который преопразует fxml в графическое представление (Scene)
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
         //Преобразуем, устанавливая размеры окна
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
         //Ставим заголовок
@@ -29,10 +35,21 @@ public class App extends Application {
         stage.setScene(scene);
         //Демострируем окно (до этого его не видно)
         stage.show();
+        //сохраняем ссылку на окно
+        savedStage = stage;
     }
 
     public static void main(String[] args) {
         //Запускаем процесс отображения окна
-        launch();
+        launch(args);
     }
+
+    public static List<Base> getBases() {
+        return bases;
+    }
+
+    public static Stage getSavedStage() {
+        return savedStage;
+    }
+
 }

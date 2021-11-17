@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ru.course.cursesortoutbiphasic/ru.course.cursesortoutbiphasic.App
+                            <mainClass>ru.course.cursesortoutbiphasic/ru.course.cursesortoutbiphasic.Main
                             </mainClass>
                         </configuration>
                     </execution>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #D2B48C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.course.cursesortoutbiphasic.SecondInterface">
+    <children>
+        <LineChart fx:id="chart" layoutX="18.0" layoutY="113.0" prefHeight="673.0" prefWidth="765.0">
+            <xAxis>
+                <NumberAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <Label layoutX="347.0" layoutY="24.0" text="ГРАФИК" textFill="#8a470a">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+        </Label>
+        <Button fx:id="goToTable" layoutX="231.0" layoutY="62.0" mnemonicParsing="false" style="-fx-background-color: #BF7130;" text="Отобразить данные в табличной форме" textFill="#4a3a02">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
