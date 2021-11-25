@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Algoritms {
     static Random random = new Random();
-    final int n = 3;
+    final int n = 10;
 
     private long simpleSort(long count) {
         long time = System.currentTimeMillis();
@@ -122,25 +122,47 @@ public class Algoritms {
             fileHelper.writeNumber(count - n + i, buffer[i]);
         }
         int x = 1;
-        while(x<count/n-1) {
+        while (x <= count / n - 1) {
             for (int i = 0; i < n; i++) {
-                buffer[i] = fileHelper.readNumber(count - 1 - (long) n *x - i);
+                buffer[i] = fileHelper.readNumber(count - 1 - (long) n * x - i);
             }
             Arrays.sort(buffer);
             int kNums = 0;
             int kFiles = 0;
-            for (int i = 0; i < n + 3*x; i++) {
-                if (kNums<n &&buffer[kNums] <= fileHelper.readNumber(count -1- (long) n *x + kFiles)) {
-                    fileHelper.writeNumber(count -1- (long) n *(x+1) + i, buffer[kNums]);
+            for (int i = 0; i < n + n * x; i++) {
+                if (buffer[kNums] <= fileHelper.readNumber(count - (long) n * x + kFiles)) {
+                    fileHelper.writeNumber(count - (long) n * (x + 1) + i, buffer[kNums]);
                     kNums++;
+                    if (kNums == n) break;
                 } else {
-                    fileHelper.writeNumber(count -1 -  (long) n *(x+1) + i, fileHelper.readNumber(count -1-(long) n *x + kFiles));
+                    fileHelper.writeNumber(count - (long) n * (x + 1) + i, fileHelper.readNumber(count - (long) n * x + kFiles));
                     kFiles++;
                 }
             }
             x++;
         }
+        int lost = (int) (count % n);
 
+        for (int i = 0; i < lost; i++) {
+            buffer[i] = fileHelper.readNumber(i);
+        }
+        for (int i = lost; i < n; i++) {
+            buffer[i] = 10000;
+        }
+        Arrays.sort(buffer);
+        int kNums = 0;
+        int kFiles = 0;
+        for (int i = 0; i < count - 1; i++) {
+            if (buffer[kNums] <= fileHelper.readNumber(lost + kFiles)) {
+                fileHelper.writeNumber(i, buffer[kNums]);
+                kNums++;
+                if (kNums == lost) break;
+            } else {
+                fileHelper.writeNumber(i, fileHelper.readNumber(lost + kFiles));
+                kFiles++;
+            }
+        }
+        fileHelper.close();
         return System.currentTimeMillis() - time;
     }
 

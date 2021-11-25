@@ -16,31 +16,10 @@ public class FileHelper {
         }
     }
 
-    public void swap(long pos1, long pos2) {
-        try {
-            raf.seek(pos1 * 5L);
-            char[] first = new char[4];
-            for (int i = 0; i < 4; i++) {
-                first[i] = (char) raf.read();
-            }
-            raf.seek(pos2 * 5L);
-            char[] second = new char[4];
-            for (int i = 0; i < 4; i++) {
-                second[i] = (char) raf.read();
-            }
-            raf.seek(pos2 * 5L);
-            raf.writeBytes(first[0] + "" + first[1] + "" + first[2] + "" + first[3]);
-            raf.seek(pos1 * 5L);
-            raf.writeBytes(second[0] + "" + second[1] + "" + second[2] + "" + second[3]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public int readNumber(long pos) {
         try {
             if (pos < 0 || raf.length() - 1 < pos * 5L) {
-                return -1;
+                return 10000;
             }
             raf.seek(pos * 5L);
             StringBuilder buffer = new StringBuilder();
