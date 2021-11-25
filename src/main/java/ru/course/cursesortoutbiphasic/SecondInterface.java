@@ -12,7 +12,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SecondInterface {
     //В скобках указываются типы осей
@@ -48,12 +50,37 @@ public class SecondInterface {
         XYChart.Series simple = new XYChart.Series();
         XYChart.Series nature = new XYChart.Series();
         XYChart.Series absorption = new XYChart.Series();
-        List<Base> nodes = Main.getBases();
+        List<Base> bases = Main.getBases();
+        //Заполняем средними значениями
+        Map<Long, Double> mapSimple = new HashMap<>();
+        Map<Long, Double> mapNature = new HashMap<>();
+        Map<Long, Double> mapAbs = new HashMap<>();
+
+        for (int i = 0; i < bases.size(); i++) {
+            if (!mapSimple.containsKey(bases.get(i).getSize())) {
+                int count = 0;
+                mapSimple.put(bases.get(i).getSize(), 0D);
+                mapAbs.put(bases.get(i).getSize(), 0D);
+                mapNature.put(bases.get(i).getSize(), 0D);
+                for (int j = 0; j < bases.size(); j++) {
+                    if (bases.get(i).getSize() == bases.get(j).getSize()) {
+                        mapSimple.put(bases.get(i).getSize(), mapSimple.get(bases.get(i).getSize()) + bases.get(j).getSimple());
+                        mapAbs.put(bases.get(i).getSize(), mapAbs.get(bases.get(i).getSize()) + bases.get(j).getAbsorption());
+                        mapNature.put(bases.get(i).getSize(), mapNature.get(bases.get(i).getSize()) + bases.get(j).getNature());
+                        count++;
+                    }
+                }
+                mapSimple.put(bases.get(i).getSize(), mapSimple.get(bases.get(i).getSize())/count);
+                mapNature.put(bases.get(i).getSize(), mapNature.get(bases.get(i).getSize())/count);
+                mapAbs.put(bases.get(i).getSize(), mapAbs.get(bases.get(i).getSize())/count);
+            }
+        }
         //Заполняем
-        for (int i = 0; i < nodes.size(); i++) {
-            simple.getData().add(new XYChart.Data(nodes.get(i).getSize(), nodes.get(i).getSimple()));
-            nature.getData().add(new XYChart.Data(nodes.get(i).getSize(), nodes.get(i).getNature()));
-            absorption.getData().add(new XYChart.Data(nodes.get(i).getSize(), nodes.get(i).getAbsorption()));
+        for (Long l: mapSimple.keySet()
+             ) {
+            simple.getData().add(new XYChart.Data(l, mapSimple.get(l)));
+            nature.getData().add(new XYChart.Data(l, mapNature.get(l)));
+            absorption.getData().add(new XYChart.Data(l, mapAbs.get(l)));
         }
         //Задаём им имена
         simple.setName("Сортировка простым слиянием");
