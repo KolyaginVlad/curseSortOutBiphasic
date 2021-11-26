@@ -118,6 +118,13 @@ public class Algoritms {
             buffer[i] = fileHelper.readNumber(count - 1 - i);
         }
         Arrays.sort(buffer);
+        if (n>count){
+            for (int i = 0; i < count; i++) {
+                fileHelper.writeNumber(i, buffer[i]);
+            }
+            fileHelper.close();
+            return System.currentTimeMillis() - time;
+        }
         for (int i = 0; i < n; i++) {
             fileHelper.writeNumber(count - n + i, buffer[i]);
         }

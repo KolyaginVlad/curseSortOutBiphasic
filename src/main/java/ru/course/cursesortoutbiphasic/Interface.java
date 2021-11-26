@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -26,6 +23,9 @@ import java.io.IOException;
 public class Interface {
     @FXML
     private TextField count;
+
+    @FXML
+    private Label labelError;
 
     @FXML
     private Button compare;
@@ -65,6 +65,8 @@ public class Interface {
         assert absorption != null : "fx:id=\"absorption\" was not injected: check your FXML file 'main.fxml'.";
         assert clean != null : "fx:id=\"clean\" was not injected: check your FXML file 'main.fxml'.";
         assert toGraph != null : "fx:id=\"toGraph\" was not injected: check your FXML file 'main.fxml'.";
+        assert labelError != null : "fx:id=\"labelError\" was not injected: check your FXML file 'main.fxml'.";
+        labelError.setVisible(false);
         //очищает таблицу и график при нажатии
         clean.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -96,6 +98,11 @@ public class Interface {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //Берём текст с поля для ввода и приводим к числу
+                if(!isDigit(count.getText())){
+                    labelError.setVisible(true);
+                    return;
+                }
+                labelError.setVisible(false);
                 long len = Long.parseLong(count.getText());
                 //Создаём класс функций
                 Algoritms algoritms = new Algoritms();
@@ -115,5 +122,11 @@ public class Interface {
         //Отображаем список линий
         ObservableList<Base> list = FXCollections.observableList(Main.getBases());
         table.setItems(list);
+    }
+    private boolean isDigit(String str){
+        for (int i = 0; i < str.length(); i++) {
+         if(!Character.isDigit(str.charAt(i))) return false;
+        }
+        return true;
     }
 }
