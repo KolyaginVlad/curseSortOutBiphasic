@@ -82,6 +82,9 @@ public class SecondInterface {
             nature.getData().add(new XYChart.Data(l, mapNature.get(l)));
             absorption.getData().add(new XYChart.Data(l, mapAbs.get(l)));
         }
+        simple.getData().add(new XYChart.Data(0, 0));
+        nature.getData().add(new XYChart.Data(0, 0));
+        absorption.getData().add(new XYChart.Data(0, 0));
         //Задаём им имена
         simple.setName("Сортировка простым слиянием");
         nature.setName("Сортировка естественным слияние");
